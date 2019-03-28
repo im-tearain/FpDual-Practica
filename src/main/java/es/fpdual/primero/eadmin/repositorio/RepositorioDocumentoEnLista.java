@@ -2,6 +2,7 @@ package es.fpdual.primero.eadmin.repositorio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -30,15 +31,12 @@ public class RepositorioDocumentoEnLista implements RepositorioDocumento{
 	}
 
 	@Override
-	public void eliminarDocumento(int codigoDocumento) {
-		if (!documentos.contains(documentos.get(codigoDocumento)))
-			throw new AdministacionElectronicaException("El documento no existe");
-		
+	public void eliminarDocumento(int id) {
 		//solucion 1
-		Documento documentoAEliminar = new Documento(codigoDocumento, null, null, null, null);
+		Documento documentoAEliminar = new Documento(id, null, null, null, null);
 		
-		//solucion 2
-		//documentos.stream().filter(d -> d.getId().intValue==codigoDocumento).findAny().orElse(null);
+		//solucion 2(spaguetti)
+		//documentos.stream().filter(d -> d.getId()==id).findAny().orElse(null);
 		
 		final int indice = documentos.indexOf(documentoAEliminar);
 		documentos.remove(indice);
@@ -46,13 +44,13 @@ public class RepositorioDocumentoEnLista implements RepositorioDocumento{
 
 	@Override
 	public List<Documento> obtenerTodosDocumentos() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.documentos.stream().collect(Collectors.toList());
 	}
 
 	@Override
 	public int siguienteId() {
-		// TODO Auto-generated method stub
-		return 0;
+		if (documentos.isEmpty())
+			return 1;
+		return documentos.get(documentos.size()-1).getId()+1;
 	}
 }

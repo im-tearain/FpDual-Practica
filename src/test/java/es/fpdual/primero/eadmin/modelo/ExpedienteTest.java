@@ -77,7 +77,6 @@ public class ExpedienteTest {
 	}
 
 	@Test
-	
 	public void devolverLaLongitudDeLosNombresYComprobarQueTengaElValorCorrecto() {
 		
 		//Inicializando
