@@ -3,47 +3,41 @@ package es.fpdual.primero.eadmin.modelo;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import es.fpdual.primero.eadmin.modelo.Documento;
 
 public class DocumentoTest {
 	
+	private final Documento documento1 = new Documento(5, null, null, null, TipoDocumento.DOCUMENTO_CONTABLE);
+	private final Documento documento2 = mock(Documento.class);
+	
 	@Test
 	public void deberiaDevolverTrueSiLosDocumentosSonIguales() {
-		
-		//Inicialización
-		final Documento documento1 = new Documento(5, null, null, null, null );
-		final Documento documento2 = new Documento(5, null, null, null, null );
-		//Ejecución
-		final boolean resultado = documento1.equals(documento2);
-		//Comprobación del resultado
-		assertTrue(resultado);
-		
+		when(documento2.getId()).thenReturn(5);
+		assertTrue(documento1.equals(documento2));
 	}
 	
 	@Test
 	public void deberiaDevolverFalseElEqualsDeDocumento() {
-		
-		//Inicialización
-		final Documento documento1 = new Documento(10, null, null, null, null );
-		final Documento documento2 = new Documento(5, null, null, null, null );
-		//Ejecución
-		final boolean resultado = documento1.equals(documento2);
-		//Comprobación del resultado
-		assertFalse(resultado);
-		
+		when(documento2.getId()).thenReturn(1);
+		assertFalse(documento1.equals(documento2));
+	}
+	
+	@Test
+	public void deberiaDevolverFalseSiNoEsUnDocumento() {
+		assertFalse(documento1.equals(null));
 	}
 	
 	@Test
 	public void deberiaDevolverTrueElHashCodeDelDocumento() {
-		
-		//Inicialización
-		final Documento documento = new Documento(5,  null, null, null, null );
-		//Ejecución
-		final int resultado = documento.hashCode();
-		//Comprobación del resultado
-		assertEquals(5, resultado);
-		
+		assertEquals(5, documento1.hashCode());
+	}
+	
+	@Test
+	public void deberiaDevolverElTipoDocumento() {
+		assertEquals(TipoDocumento.DOCUMENTO_CONTABLE, documento1.getTipoDocumento());
 	}
 	
 }

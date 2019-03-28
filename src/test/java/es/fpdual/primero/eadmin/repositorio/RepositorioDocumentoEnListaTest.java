@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -43,9 +44,8 @@ public class RepositorioDocumentoEnListaTest {
 	
 	@Test
 	public void deberiaModificarNuevoDocumento() {
-		Documento documentoModificado = mock(Documento.class);
-		when(documentoModificado.getId()).thenReturn(2);
-		when(documentoModificado.getNombre()).thenReturn("documentoModificado");
+		Documento documentoModificado = new Documento(2, "documentoModificado", null, null, null);
+		// Deberia ser un mock pero accede al equals del mock en vez de al del objeto y falla el contains
 		
 		when(documento.getId()).thenReturn(2);
 		when(documento.getNombre()).thenReturn("documentoPrueba");
@@ -61,6 +61,32 @@ public class RepositorioDocumentoEnListaTest {
 		this.repositorioDocumento.modificarDocumento(documento);
 		
 		assertTrue(this.repositorioDocumento.obtenerTodosDocumentos().contains(documento));
+	}
+	
+	@Test
+	public void deberiaEliminarDocumento() {
+		when(documento.getNombre()).thenReturn("documentoPrueba");
+		when(documento.getId()).thenReturn(2);
+		
+		this.repositorioDocumento.altaDocumento(documento);
+		this.repositorioDocumento.eliminarDocumento(documento.getId());
+		
+		assertFalse(this.repositorioDocumento.obtenerTodosDocumentos().contains(documento));
+	}
+	
+	@Test
+	public void deberiaDevolverIdUnoSiLaListaEstaVacia() {
+		assertEquals(1, this.repositorioDocumento.siguienteId());
+	}
+	
+	@Test
+	public void deberiaDevolverElPrimerIdDisponible() {
+		when(documento.getNombre()).thenReturn("documentoPrueba");
+		when(documento.getId()).thenReturn(2);
+		
+		this.repositorioDocumento.altaDocumento(documento);
+		
+		assertEquals(3, this.repositorioDocumento.siguienteId());
 	}
 	
 }
