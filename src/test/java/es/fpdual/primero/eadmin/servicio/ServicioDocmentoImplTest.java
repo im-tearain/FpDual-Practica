@@ -52,7 +52,7 @@ public class ServicioDocmentoImplTest {
 	
 	@Test
 	public void deberiaDarAltaDocumento() {
-		final Documento resultado = this.servicioDocumento.altaDocumento(documento);
+		this.servicioDocumento.altaDocumento(documento);
 		when(this.repositorioDocumento.siguienteId()).thenReturn(10);
 	}
 	

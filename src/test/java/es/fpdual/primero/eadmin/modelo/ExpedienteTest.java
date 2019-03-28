@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.assertj.core.util.Arrays;
 import org.junit.Test;
 
 import es.fpdual.primero.eadmin.modelo.Documento;
@@ -52,7 +51,7 @@ public class ExpedienteTest {
 
 		documentos.stream().filter(this::esDocumentoContable).forEach(System.out::println);
 
-		final List<Documento> documentoContables = documentos.stream().filter(this::esDocumentoContable)
+		documentos.stream().filter(this::esDocumentoContable)
 				.collect(Collectors.toList());
 
 		documentos.stream().map(documentoActual -> documentoActual.getNombre()).map(nombre -> nombre.length())
