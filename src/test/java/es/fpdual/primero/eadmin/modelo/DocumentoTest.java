@@ -34,7 +34,6 @@ public class DocumentoTest {
 		
 	}
 	
-	
 	@Test
 	public void deberiaDevolverTrueElHashCodeDelDocumento() {
 		
