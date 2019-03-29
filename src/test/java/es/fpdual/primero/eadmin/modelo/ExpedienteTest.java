@@ -17,7 +17,7 @@ import es.fpdual.primero.eadmin.modelo.TipoExpediente;
 import es.fpdual.primero.eadmin.modelo.Usuario;
 
 public class ExpedienteTest {
-
+	
 	@Test
 	public void deberiaConstruirUnExpedienteConDocumentos() {
 		final Usuario usuario = new Usuario(1, "Juan", "Alcalde");

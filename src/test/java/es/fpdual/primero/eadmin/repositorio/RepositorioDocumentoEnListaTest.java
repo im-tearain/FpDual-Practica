@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,6 @@ public class RepositorioDocumentoEnListaTest {
 	
 	@Test
 	public void deberiaAlmacenarNuevoDocumento() {
-		when(documento.getNombre()).thenReturn("documentoPrueba");
 		when(documento.getId()).thenReturn(2);
 		this.repositorioDocumento.altaDocumento(documento);
 		
@@ -34,7 +32,6 @@ public class RepositorioDocumentoEnListaTest {
 	
 	@Test (expected = AdministacionElectronicaException.class)
 	public void deberiaLanzarExcepcionAlAlmacenarDocumentoExistente() {
-		when(documento.getNombre()).thenReturn("documentoPrueba");
 		when(documento.getId()).thenReturn(2);
 		this.repositorioDocumento.altaDocumento(documento);
 		this.repositorioDocumento.altaDocumento(documento);
@@ -45,10 +42,8 @@ public class RepositorioDocumentoEnListaTest {
 	@Test
 	public void deberiaModificarNuevoDocumento() {
 		Documento documentoModificado = new Documento(2, "documentoModificado", null, null, null);
-		// Deberia ser un mock pero accede al equals del mock en vez de al del objeto y falla el contains
 		
 		when(documento.getId()).thenReturn(2);
-		when(documento.getNombre()).thenReturn("documentoPrueba");
 		
 		this.repositorioDocumento.altaDocumento(documento);
 		this.repositorioDocumento.modificarDocumento(documentoModificado);
@@ -58,35 +53,38 @@ public class RepositorioDocumentoEnListaTest {
 	
 	@Test (expected = AdministacionElectronicaException.class)
 	public void deberiaLanzarExcepcionAlModificarDocumentoExistente() {
-		this.repositorioDocumento.modificarDocumento(documento);
-		
-		assertTrue(this.repositorioDocumento.obtenerTodosDocumentos().contains(documento));
+		this.repositorioDocumento.modificarDocumento(this.documento);
 	}
 	
 	@Test
 	public void deberiaEliminarDocumento() {
-		when(documento.getNombre()).thenReturn("documentoPrueba");
-		when(documento.getId()).thenReturn(2);
+		when(this.documento.getId()).thenReturn(2);
 		
 		this.repositorioDocumento.altaDocumento(documento);
-		this.repositorioDocumento.eliminarDocumento(documento.getId());
+		this.repositorioDocumento.eliminarDocumento(2);
 		
-		assertFalse(this.repositorioDocumento.obtenerTodosDocumentos().contains(documento));
+		assertTrue(this.repositorioDocumento.obtenerTodosDocumentos().isEmpty());
+	}
+	
+	@Test
+	public void deberiaNoHacerNadaSiNoEstaElDocumento() {
+		this.repositorioDocumento.eliminarDocumento(2);
 	}
 	
 	@Test
 	public void deberiaDevolverIdUnoSiLaListaEstaVacia() {
-		assertEquals(1, this.repositorioDocumento.siguienteId());
+		final int resultado = this.repositorioDocumento.siguienteId();
+		assertEquals(1, resultado);
 	}
 	
 	@Test
 	public void deberiaDevolverElPrimerIdDisponible() {
-		when(documento.getNombre()).thenReturn("documentoPrueba");
 		when(documento.getId()).thenReturn(2);
 		
 		this.repositorioDocumento.altaDocumento(documento);
 		
-		assertEquals(3, this.repositorioDocumento.siguienteId());
+		final int resultado = this.repositorioDocumento.siguienteId();
+		assertEquals(3, resultado);
 	}
 	
 }
