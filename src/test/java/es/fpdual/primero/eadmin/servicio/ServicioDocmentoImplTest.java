@@ -52,8 +52,8 @@ public class ServicioDocmentoImplTest {
 	
 	@Test
 	public void deberiaDarAltaDocumento() {
-		this.servicioDocumento.altaDocumento(documento);
 		when(this.repositorioDocumento.siguienteId()).thenReturn(10);
+		this.servicioDocumento.altaDocumento(documento);
 	}
 	
 }

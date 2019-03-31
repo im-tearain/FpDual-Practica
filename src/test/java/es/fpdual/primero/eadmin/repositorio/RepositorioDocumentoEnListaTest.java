@@ -41,14 +41,14 @@ public class RepositorioDocumentoEnListaTest {
 	
 	@Test
 	public void deberiaModificarNuevoDocumento() {
-		Documento documentoModificado = new Documento(2, "documentoModificado", null, null, null);
+		Documento documentoModificado = new Documento(2, "documento Modificado", null, null, null);
 		
 		when(documento.getId()).thenReturn(2);
 		
 		this.repositorioDocumento.altaDocumento(documento);
 		this.repositorioDocumento.modificarDocumento(documentoModificado);
 		
-		assertEquals("documentoModificado", this.repositorioDocumento.obtenerTodosDocumentos().get(0).getNombre());
+		assertEquals("documento Modificado", this.repositorioDocumento.obtenerTodosDocumentos().get(0).getNombre());
 	}
 	
 	@Test (expected = AdministacionElectronicaException.class)
