@@ -57,4 +57,12 @@ public class RepositorioDocumentoEnLista implements RepositorioDocumento{
 			return 1;
 		return documentos.get(documentos.size()-1).getId()+1;
 	}
+
+	@Override
+	public Documento getDocumentoById(int id) {
+		Documento documento = documentos.stream().filter(d -> d.getId()==id).findFirst().orElse(null);
+		if (documento == null)
+			throw new AdministacionElectronicaException("No se ha encontrado el documento");
+		return documento;
+	}
 }

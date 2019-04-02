@@ -9,10 +9,15 @@ public class ExpedienteRequestMapper {
 	private ExpedienteRequestMapper() {}
 	
 	public static Expediente toExpediente(ExpedienteRequest expedienteRequest) {
-		return new Expediente(expedienteRequest.getId(), expedienteRequest.getNombre(), construyeUsuario(expedienteRequest), 
-				expedienteRequest.getFechaCreacion(), construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
+		return new Expediente(0, expedienteRequest.getNombre(), construyeUsuario(expedienteRequest), 
+				null, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
 	}
 
+	private static Usuario construyeUsuario(ExpedienteRequest expedienteRequest) {
+		int id = Integer.parseInt(expedienteRequest.getUsuario());
+		return new Usuario(id, "usuario"+id, "cargo"+id);
+	}
+	
 	private static TipoExpediente construyeTipoExpediente(String tipoExpediente) {
 		TipoExpediente resultado;
 		
@@ -38,8 +43,5 @@ public class ExpedienteRequestMapper {
 		
 		return resultado;
 	}
-
-	private static Usuario construyeUsuario(ExpedienteRequest expedienteRequest) {
-		return new Usuario(expedienteRequest.getId(), "usuario"+expedienteRequest.getId(), "cargo"+expedienteRequest.getId());
-	}
+	
 }

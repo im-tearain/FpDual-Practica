@@ -1,8 +1,10 @@
 package es.fpdual.primero.eadmin.modelo;
 
-public class Usuario extends AdministracionElectronicaBase{
+public class Usuario {
 	
 
+	private final int id;
+	private final String nombre;
 	private final String cargo;
 
 	public Usuario(int id, String nombre, String cargo) {
@@ -10,11 +12,19 @@ public class Usuario extends AdministracionElectronicaBase{
 		this.nombre = nombre;
 		this.cargo = cargo;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
 
 	public String getCargo() {
 		return cargo;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Usuario) {

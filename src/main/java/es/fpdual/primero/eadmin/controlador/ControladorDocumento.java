@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,15 +34,22 @@ public class ControladorDocumento {
 		return this.servicioDocumento.obtenerTodosDocumentos();
 	}
 	
-	@PutMapping("/docuemntos")
-	public Documento modificarDocumento(DocumentoRequest documentoRequest) {
-		final Documento documentoAModificar = DocumentoRequestMapper.toDocumento(documentoRequest);
+	@GetMapping("/documentos/{id}")
+	public Documento getDocumentoById(@PathVariable("id") int id) {
+		return this.servicioDocumento.getDocumentoById(id);
+	}
+	
+	@PutMapping("/documentos/{id}")
+	public Documento modificarDocumento(@PathVariable("id") int id, @RequestBody DocumentoRequest documentoRequest) {
+		final Documento documento = this.servicioDocumento.getDocumentoById(id);
+		final Documento documentoAModificar = DocumentoRequestMapper.toDocumentoCompleto(documentoRequest, id, documento.getFechaCreacion());
+		
 		return this.servicioDocumento.modificarDocumento(documentoAModificar);
 	}
 	
-	@DeleteMapping("/documentos")
-	public void eliminarDocumento(DocumentoRequest documentoRequest) {
-		this.servicioDocumento.eliminarDocumento(documentoRequest.getId());
+	@DeleteMapping("/documentos/{id}")
+	public void eliminarDocumento(@PathVariable("id") int id) {
+		this.servicioDocumento.eliminarDocumento(id);
 	}
 	
 }

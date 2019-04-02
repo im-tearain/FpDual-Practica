@@ -46,4 +46,9 @@ public class ServicioDocumentoImpl implements ServicioDocumento{
 		return repositorioDocumento.obtenerTodosDocumentos();
 	}
 
+	@Override
+	public Documento getDocumentoById(int id) {
+		return repositorioDocumento.getDocumentoById(id);
+	}
+
 }

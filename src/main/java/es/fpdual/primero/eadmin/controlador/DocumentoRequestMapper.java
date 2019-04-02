@@ -1,5 +1,7 @@
 package es.fpdual.primero.eadmin.controlador;
 
+import java.util.Date;
+
 import es.fpdual.primero.eadmin.modelo.Documento;
 import es.fpdual.primero.eadmin.modelo.TipoDocumento;
 import es.fpdual.primero.eadmin.modelo.Usuario;
@@ -9,10 +11,20 @@ public class DocumentoRequestMapper {
 	private DocumentoRequestMapper() {}
 	
 	public static Documento toDocumento(DocumentoRequest documentoRequest) {
-		return new Documento(documentoRequest.getId(), documentoRequest.getNombre(), construyeUsuario(documentoRequest), 
-				documentoRequest.getFechaCreacion(), construyeTipoDocumento(documentoRequest.getTipoDocumento()));
+		return new Documento(0, documentoRequest.getNombre(), construyeUsuario(documentoRequest), 
+				null, construyeTipoDocumento(documentoRequest.getTipoDocumento()));
+	}
+	
+	public static Documento toDocumentoCompleto(DocumentoRequest documentoRequest, int id, Date fechaCreacion) {
+		return new Documento(id, documentoRequest.getNombre(), construyeUsuario(documentoRequest), 
+				fechaCreacion, construyeTipoDocumento(documentoRequest.getTipoDocumento()));
 	}
 
+	private static Usuario construyeUsuario(DocumentoRequest documentoRequest) {
+		int id = Integer.parseInt(documentoRequest.getUsuario());
+		return new Usuario(id, "usuario"+id, "cargo"+id);
+	}
+	
 	private static TipoDocumento construyeTipoDocumento(String tipoDocumento) {
 		TipoDocumento resultado;
 		
@@ -37,10 +49,6 @@ public class DocumentoRequestMapper {
 		}
 		
 		return resultado;
-	}
-
-	private static Usuario construyeUsuario(DocumentoRequest documentoRequest) {
-		return new Usuario(documentoRequest.getId(), "usuario"+documentoRequest.getId(), "cargo"+documentoRequest.getId());
 	}
 	
 }

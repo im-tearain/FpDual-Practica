@@ -39,6 +39,7 @@ public class ControladorExpediente {
 	
 	@DeleteMapping("/expedientes")
 	public void eliminarExpediente(ExpedienteRequest expedienteRequest) {
-		this.servicioExpediente.eliminarExpediente(expedienteRequest.getId());
+		final Expediente expedienteAModificar = ExpedienteRequestMapper.toExpediente(expedienteRequest);
+		this.servicioExpediente.eliminarExpediente(expedienteAModificar.getId());
 	}
 }
