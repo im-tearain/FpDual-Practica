@@ -3,9 +3,12 @@ package es.fpdual.primero.eadmin.repositorio;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import es.fpdual.primero.eadmin.modelo.AdministacionElectronicaException;
 import es.fpdual.primero.eadmin.modelo.Expediente;
 
+@Repository
 public class RepositorioExpedienteEnLista implements RepositorioExpediente{
 
 	private final List<Expediente> expedientes = new ArrayList<>();
