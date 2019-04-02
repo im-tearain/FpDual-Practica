@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.fpdual.primero.eadmin.modelo.Documento;
@@ -29,6 +31,17 @@ public class ControladorDocumento {
 	@GetMapping("/documentos")
 	public List<Documento> obtenerTodosLosDocumentos() {
 		return this.servicioDocumento.obtenerTodosDocumentos();
+	}
+	
+	@PutMapping("/docuemntos")
+	public Documento modificarDocumento(DocumentoRequest documentoRequest) {
+		final Documento documentoAModificar = DocumentoRequestMapper.toDocumento(documentoRequest);
+		return this.servicioDocumento.modificarDocumento(documentoAModificar);
+	}
+	
+	@DeleteMapping("/documentos")
+	public void eliminarDocumento(DocumentoRequest documentoRequest) {
+		this.servicioDocumento.eliminarDocumento(documentoRequest.getId());
 	}
 	
 }
