@@ -52,4 +52,12 @@ public class RepositorioExpedienteEnLista implements RepositorioExpediente{
 		return resultado;
 	}
 
+	@Override
+	public Expediente getExpedienteById(int id) {
+		Expediente expediente = expedientes.stream().filter(d -> d.getId()==id).findFirst().orElse(null);
+		if (expediente == null)
+			throw new AdministacionElectronicaException("No se ha encontrado el documento");
+		return expediente;
+	}
+
 }

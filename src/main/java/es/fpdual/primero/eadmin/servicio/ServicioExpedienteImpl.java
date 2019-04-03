@@ -47,4 +47,9 @@ public class ServicioExpedienteImpl implements ServicioExpediente {
 		return this.repositorioExpediente.obtenerTodosExpedientes();
 	}
 
+	@Override
+	public Expediente getExpedienteById(int id) {
+		return repositorioExpediente.getExpedienteById(id);
+	}
+
 }

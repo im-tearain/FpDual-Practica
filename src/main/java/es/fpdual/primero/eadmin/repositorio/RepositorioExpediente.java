@@ -10,4 +10,5 @@ public interface RepositorioExpediente {
 	void eliminarExpediente(int codigoExpediente);
 	List<Expediente> obtenerTodosExpedientes();
 	int siguienteId();
+	Expediente getExpedienteById(int id);
 }

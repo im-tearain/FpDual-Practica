@@ -9,4 +9,5 @@ public interface ServicioExpediente {
 	Expediente modificarExpediente(Expediente expediente);
 	void eliminarExpediente(int codigoExpediente);
 	List<Expediente> obtenerTodosExpedientes();
+	Expediente getExpedienteById(int id);
 }

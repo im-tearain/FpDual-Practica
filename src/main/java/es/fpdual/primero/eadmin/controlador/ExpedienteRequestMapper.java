@@ -1,5 +1,7 @@
 package es.fpdual.primero.eadmin.controlador;
 
+import java.util.Date;
+
 import es.fpdual.primero.eadmin.modelo.Expediente;
 import es.fpdual.primero.eadmin.modelo.TipoExpediente;
 import es.fpdual.primero.eadmin.modelo.Usuario;
@@ -11,6 +13,11 @@ public class ExpedienteRequestMapper {
 	public static Expediente toExpediente(ExpedienteRequest expedienteRequest) {
 		return new Expediente(0, expedienteRequest.getNombre(), construyeUsuario(expedienteRequest), 
 				null, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
+	}
+	
+	public static Expediente toExpedienteCompleto(ExpedienteRequest expedienteRequest, int id, Date fechaCreacion) {
+		return new Expediente(id, expedienteRequest.getNombre(), construyeUsuario(expedienteRequest), 
+				fechaCreacion, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
 	}
 
 	private static Usuario construyeUsuario(ExpedienteRequest expedienteRequest) {
