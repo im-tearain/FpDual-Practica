@@ -31,4 +31,17 @@ public class Documento extends AdministracionElectronicaBase {
 	public int hashCode() {
 		return this.id;
 	}
+
+	@Override
+	public String toString() {
+		return "\n----------------------------------------------------------"+
+				"\nID: "+this.getId() +
+				"\nNOMBRE: "+this.getNombre() +
+				"\nUSUARIO: "+this.getUsuario() +
+				"\nFECHA DE CREACION: "+this.getFechaCreacion() +
+				"\nTIPO DE DOCUMENTO: "+this.getTipoDocumento() +
+				"\n----------------------------------------------------------\n";
+	}
+	
+	
 }

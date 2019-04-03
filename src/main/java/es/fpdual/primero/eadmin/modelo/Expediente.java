@@ -29,7 +29,7 @@ public class Expediente extends AdministracionElectronicaBase {
 
 	public List<Integer> obtenerLongitudNombresDocumentos() {
 		if (documentos.size() == 0) {
-			throw new AdministacionElectronicaException("Lista de documentos vacia");
+			throw new AdministacionElectronicaException();
 		}
 		return documentos.stream().filter(this::esDocumentoContable).map(Documento::getNombre).map(String::length)
 				.collect(Collectors.toList());

@@ -16,7 +16,7 @@ public class RepositorioExpedienteEnLista implements RepositorioExpediente{
 	@Override
 	public void altaExpediente(Expediente expediente) {
 		if (expedientes.contains(expediente))
-			throw new AdministacionElectronicaException("El expediente ya se encontraba en nuestra base de datos");
+			throw new AdministacionElectronicaException();
 		
 		expedientes.add(expediente);
 		System.out.println("Expediente almacenado correctamente");
@@ -25,7 +25,7 @@ public class RepositorioExpedienteEnLista implements RepositorioExpediente{
 	@Override
 	public void modificarExpediente(Expediente expediente) {
 		if (!expedientes.contains(expediente))
-			throw new AdministacionElectronicaException("El expediente no existe");
+			throw new AdministacionElectronicaException();
 		
 		expedientes.set(expedientes.indexOf(expediente), expediente);
 	}
@@ -56,7 +56,7 @@ public class RepositorioExpedienteEnLista implements RepositorioExpediente{
 	public Expediente getExpedienteById(int id) {
 		Expediente expediente = expedientes.stream().filter(d -> d.getId()==id).findFirst().orElse(null);
 		if (expediente == null)
-			throw new AdministacionElectronicaException("No se ha encontrado el documento");
+			throw new AdministacionElectronicaException();
 		return expediente;
 	}
 

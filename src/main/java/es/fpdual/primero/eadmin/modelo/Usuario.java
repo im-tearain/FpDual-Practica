@@ -32,6 +32,13 @@ public class Usuario {
 			return usuario.getId() == usuario.getId();
 		}
 		return false;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "\n\tid=" + id + "\n\tnombre=" + nombre + "\n\tcargo=" + cargo;
+	}
+	
+	
 	
 }
