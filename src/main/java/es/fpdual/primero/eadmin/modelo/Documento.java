@@ -2,16 +2,21 @@ package es.fpdual.primero.eadmin.modelo;
 
 import java.util.Date;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 public class Documento extends AdministracionElectronicaBase {
 
 	private final TipoDocumento tipoDocumento;
+	private static final Logger logger = LogManager.getLogger(DocumentoContable.class);
 
 	public Documento(int id, String nombre, Usuario usuario, Date fechaCreacion, TipoDocumento tipoDocumento) {
 		this.id = id;
 		this.nombre = nombre;
 		this.usuario = usuario;
 		this.fechaCreacion = fechaCreacion;
-		this.tipoDocumento = tipoDocumento;	
+		this.tipoDocumento = tipoDocumento;
+		logger.trace("Documento creado");
 	}
 	
 	public TipoDocumento getTipoDocumento() {

@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import es.fpdual.primero.eadmin.modelo.Documento;
+import es.fpdual.primero.eadmin.modelo.DocumentoContable;
+
 
 
 
@@ -18,6 +21,8 @@ public class EadminApplication {
 		logger.info("Iniciando servicio...");
 		ConfigurableApplicationContext ejemplo = SpringApplication.run(EadminApplication.class, args);
 		
+		DocumentoContable documentoContable = new DocumentoContable(0, null, null, null, null);
+		Documento documento = new Documento(0, null, null, null, null);
 		//ejemplo.close();
 		//logger.info("Servicio finalizado");
 	}
