@@ -9,13 +9,16 @@ import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import es.fpdual.primero.eadmin.modelo.Documento;
 import es.fpdual.primero.eadmin.modelo.Usuario;
 
 public abstract class BaseDocumentoMapperTest {
 
-	private DocumentoMapper mapper;
+	@Autowired
+	DocumentoMapper mapper;
+
 	private Usuario usuario;
 	private Documento documento;
 	private final LocalDate fechaActual = LocalDate.now();
