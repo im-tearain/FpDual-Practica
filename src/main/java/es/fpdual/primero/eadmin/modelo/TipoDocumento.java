@@ -2,7 +2,6 @@ package es.fpdual.primero.eadmin.modelo;
 
 public enum TipoDocumento {
 
-	//Clase estática
 	DOCUMENTO_CONTABLE(0), 
 	DOCUMENTO_FACTURA(1), 
 	DOCUMENTO_NOMINA(2), 

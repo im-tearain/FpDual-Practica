@@ -1,12 +1,12 @@
 package es.fpdual.primero.eadmin.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DocumentoFactura extends Documento {
 
 	private final double importeFactura;
 
-	public DocumentoFactura(int id, String nombre, Usuario usuario, Date fechaCreacion, double importeFactura) {
+	public DocumentoFactura(int id, String nombre, Usuario usuario, LocalDate fechaCreacion, double importeFactura) {
 		super(id, nombre, usuario, fechaCreacion, TipoDocumento.DOCUMENTO_FACTURA);
 
 		this.importeFactura = importeFactura;

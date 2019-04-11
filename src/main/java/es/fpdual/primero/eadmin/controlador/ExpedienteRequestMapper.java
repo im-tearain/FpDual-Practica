@@ -1,6 +1,6 @@
 package es.fpdual.primero.eadmin.controlador;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import es.fpdual.primero.eadmin.modelo.Expediente;
 import es.fpdual.primero.eadmin.modelo.TipoExpediente;
@@ -15,9 +15,9 @@ public class ExpedienteRequestMapper {
 				null, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
 	}
 	
-	public static Expediente toExpedienteCompleto(ExpedienteRequest expedienteRequest, int id, Date fechaCreacion) {
+	public static Expediente toExpedienteCompleto(ExpedienteRequest expedienteRequest, int id, LocalDate localDate) {
 		return new Expediente(id, expedienteRequest.getNombre(), construyeUsuario(expedienteRequest), 
-				fechaCreacion, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
+				localDate, construyeTipoExpediente(expedienteRequest.getTipoExpediente()), expedienteRequest.getDocumentos());
 	}
 
 	private static Usuario construyeUsuario(ExpedienteRequest expedienteRequest) {

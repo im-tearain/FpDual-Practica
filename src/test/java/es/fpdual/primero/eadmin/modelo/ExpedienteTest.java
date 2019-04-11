@@ -2,8 +2,8 @@ package es.fpdual.primero.eadmin.modelo;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +21,11 @@ public class ExpedienteTest {
 	@Test
 	public void deberiaConstruirUnExpedienteConDocumentos() {
 		final Usuario usuario = new Usuario(1, "Juan", "Alcalde");
-		final DocumentoContable documentoContable = new DocumentoContable(10, "operacion contable", usuario, new Date(),
+		final DocumentoContable documentoContable = new DocumentoContable(10, "operacion contable", usuario, LocalDate.now(),
 				"12312312321312321");
-		final Documento documento = new DocumentoContable(15, "operacion contable", usuario, new Date(),
+		final Documento documento = new DocumentoContable(15, "operacion contable", usuario, LocalDate.now(),
 				"999999999999999");
-		final Documento documentoNuevo = new Documento(20, "operacion contable", usuario, new Date(),
+		final Documento documentoNuevo = new Documento(20, "operacion contable", usuario, LocalDate.now(),
 				TipoDocumento.DOCUMENTO_PADRON);
 		final List<Documento> documentos = new ArrayList<Documento>();
 
@@ -63,7 +63,7 @@ public class ExpedienteTest {
 		documentos.add(documento);
 		documentos.add(documentoNuevo);
 
-		final Expediente expediente = new Expediente(1, "expediente 1", usuario, new Date(),
+		final Expediente expediente = new Expediente(1, "expediente 1", usuario, LocalDate.now(),
 				TipoExpediente.EXPEDIENTE_LICENCIA_OBRAS, documentos);
 
 		// Comprobar resultados
@@ -81,7 +81,7 @@ public class ExpedienteTest {
 		
 		//Inicializando
 		final Usuario usuario = new Usuario (2,"usu","c");
-		final Date fechaCreacion = new Date();
+		final LocalDate fechaCreacion = LocalDate.now();
 		final Documento doc1 =  new Documento(1,"uno",usuario,fechaCreacion,TipoDocumento.DOCUMENTO_CONTABLE);
 		final Documento doc2 =  new Documento(2,"cuatro",usuario,fechaCreacion,TipoDocumento.DOCUMENTO_CONTABLE);
 		final List<Documento> documentos = new ArrayList<>();

@@ -1,6 +1,6 @@
 package es.fpdual.primero.eadmin.servicio;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class ServicioExpedienteImpl implements ServicioExpediente {
 	@Override
 	public Expediente altaExpediente(Expediente expediente) {
 		final int siguienteId = this.repositorioExpediente.siguienteId();
-		final Date fechaActual = new Date();
+		final LocalDate fechaActual = LocalDate.now();
 		
 		Expediente expedienteModificado = new Expediente(siguienteId, expediente.getNombre(), 
 				expediente.getUsuario(), fechaActual, expediente.getTipoExpediente(), expediente.getDocumentos());

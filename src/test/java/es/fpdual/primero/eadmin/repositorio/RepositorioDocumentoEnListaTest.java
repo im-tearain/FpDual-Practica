@@ -33,10 +33,9 @@ public class RepositorioDocumentoEnListaTest {
 	@Test (expected = AdministacionElectronicaException.class)
 	public void deberiaLanzarExcepcionAlAlmacenarDocumentoExistente() {
 		when(documento.getId()).thenReturn(2);
-		this.repositorioDocumento.altaDocumento(documento);
-		this.repositorioDocumento.altaDocumento(documento);
 		
-		assertTrue(this.repositorioDocumento.obtenerTodosDocumentos().contains(documento));
+		this.repositorioDocumento.altaDocumento(documento);
+		this.repositorioDocumento.altaDocumento(documento);
 	}
 	
 	@Test
