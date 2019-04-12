@@ -7,13 +7,48 @@
             DOC_NOM,
             DOC_USU,
             DOC_FEC,
-            DOC_TDO;
+            DOC_TDO
         ) VALUES (
             #{documento.id}, /*DOC_ID,*/
             #{documento.nombre}, /*DOC_NOM,*/
-            #{documento.usuario}, /*DOC_USU,*/
+            #{documento.usuario.id}, /*DOC_USU,*/
             #{documento.fechaCreacion}, /*DOC_FEC,*/
-            #{documento.tipoDocumento}, /*DOC_TDO,*/
-        )        
+            #{documento.tipoDocumento} /*DOC_TDO,*/
+        )      
     </insert>
+    
+    <select id="getDocumento" resultMap="documentoResultMap">
+    	SELECT 
+            DOC_ID,
+            DOC_NOM,
+            DOC_USU,
+            DOC_FEC,
+            DOC_TDO
+        FROM DOC
+        WHERE DOC_ID = #{id};
+    </select>
+    
+    <resultMap type="es.fpdual.primero.eadmin.modelo.Documento" id="documentoResultMap">
+        <constructor>
+            <idArg column="DOC_ID" javaType="integer"/>
+            <arg column="DOC_NOM" javaType="string" />
+            <arg column="DOC_USU" javaType="es.fpdual.primero.eadmin.modelo.Usuario" resultMap="usuarioResultMap"/>            
+            <arg column="DOC_FEC" javaType="java.time.LocalDate"/>
+            <arg column="DOC_TDO" javaType="es.fpdual.primero.eadmin.modelo.TipoDocumento"/>
+        </constructor>
+    </resultMap>
+    
+    <resultMap type="es.fpdual.primero.eadmin.modelo.Usuario" id="usuarioResultMap">
+        <constructor>
+            <idArg column="DOC_USU" javaType="integer"/>
+        </constructor>
+    </resultMap>
+    
+    <update id="actualizarDocumento">
+    	Update DOC Set
+    		DOC_NOM = #{documento.nombre},
+    		DOC_TDO = #{documento.tipoDocumento}
+    	Where DOC_ID = #{documento.id}
+    </update>
+
 </mapper> 

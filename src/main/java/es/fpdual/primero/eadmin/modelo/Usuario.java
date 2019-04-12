@@ -1,7 +1,6 @@
 package es.fpdual.primero.eadmin.modelo;
 
 public class Usuario {
-	
 
 	private final int id;
 	private final String nombre;
@@ -12,17 +11,22 @@ public class Usuario {
 		this.nombre = nombre;
 		this.cargo = cargo;
 	}
-	
-	public int getId() {
-		return id;
+
+	@SuppressWarnings("unused")
+	private Usuario(Integer id) { // NOSONAR myBatis
+		this(id, null, null);
 	}
-	
+
+	public int getId() {
+		return this.id;
+	}
+
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 
 	public String getCargo() {
-		return cargo;
+		return this.cargo;
 	}
 
 	@Override
@@ -36,9 +40,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "\n\tid=" + id + "\n\tnombre=" + nombre + "\n\tcargo=" + cargo;
+		return "\n\tid=" + this.id + "\n\tnombre=" + this.nombre + "\n\tcargo=" + this.cargo;
 	}
-	
-	
-	
+
 }
